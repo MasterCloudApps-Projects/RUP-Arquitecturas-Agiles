@@ -1,0 +1,43 @@
+@startuml DomainModel
+
+class Community
+class Person 
+
+class Board
+
+class Product
+class Family
+class SimpleFamily
+class ComplexFamily
+class Borrow
+
+class Comment 
+class Score 
+class Address
+
+Community *-down- Board : 1-1
+Community *-down- Person : 1-N
+Community *-down- Borrow : 1-N
+Community *-down- Family : 1-N
+
+Board *-- Product : 1-N
+
+Borrow o-- Comment : 0-N
+Borrow o-- Score : 0-N
+Borrow *-- Product : 1-N
+Borrow *-- Person : 1-N\nborrower
+Borrow *-- Person : 1-N\nlender
+
+Comment <-- Person : 0-N
+
+Person o-- Product : 1-N\nowner
+Person o-- Address : 1-N
+Person --> Score : 0-N
+
+Product --> Family : 1-1
+Product --> Address : 1-1
+
+Family <|-- SimpleFamily
+Family <|-- ComplexFamily
+
+@enduml

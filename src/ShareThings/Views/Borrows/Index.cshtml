@@ -1,0 +1,144 @@
+﻿@model ShareThings.Models.BorrowsViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Borrower list</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Lender.First().ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lender.First().Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lender.First().End)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lender.First().ProductOwner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lender.First().Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lender.First().Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Borrower)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.End)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductOwner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @if (item.Status == "Accepted" || item.Status == "Rejected")
+                {
+                    <a asp-action="Details" asp-route-id="@item.BorrowId">Details</a>  <span>|</span>
+                    <a asp-action="AddComment" asp-route-id="@item.BorrowId">Add Comment</a>  <span>|</span>
+                    <a asp-action="Score" asp-route-id="@item.BorrowId">Set Score</a>
+                }
+                else
+                {
+                    <a asp-action="Edit" asp-route-id="@item.BorrowId">Edit</a>  <span>|</span>
+                    <a asp-action="Details" asp-route-id="@item.BorrowId">Details</a>  <span>|</span>
+                    <a asp-action="AddComment" asp-route-id="@item.BorrowId">Add Comment</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<h1>Lender list</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Borrower.First().ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Borrower.First().Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Borrower.First().End)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Borrower.First().ProductOwner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Borrower.First().Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lender.First().Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Lender)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.End)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductOwner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+
+                @if (item.Status == "Accepted" || item.Status == "Rejected")
+                {
+                    <a asp-action="Details" asp-route-id="@item.BorrowId">Details</a>  <span>|</span>
+                    <a asp-action="AddComment" asp-route-id="@item.BorrowId">Add Comment</a>  <span>|</span>
+                    <a asp-action="Score" asp-route-id="@item.BorrowId">Set Score</a>
+                }
+                else
+                {
+                    <a asp-action="Details" asp-route-id="@item.BorrowId">Details</a>  <span>|</span>
+                    <a asp-action="Confirm" asp-route-id="@item.BorrowId">Confirm</a>  <span>|</span>
+                    <a asp-action="Reject" asp-route-id="@item.BorrowId">Reject</a>  <span>|</span>
+                    <a asp-action="AddComment" asp-route-id="@item.BorrowId">Add Comment</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+

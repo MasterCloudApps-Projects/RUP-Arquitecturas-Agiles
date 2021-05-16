@@ -1,0 +1,28 @@
+@startuml UserLogin
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary AccountView
+control AccountController
+entity UserRepository
+entity UserEntity
+
+Actor -right-> (AccountView) : 1.setUserData()\n2.login(user)
+(AccountView) --> (AccountController) : 3.login(user)
+(AccountController) --> (UserRepository) : 5.findByMail(user)
+(AccountController) --> (UserEntity) : 4.checkIsInSession(user)\n6.checkPassword(password)
+@enduml

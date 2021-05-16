@@ -1,0 +1,40 @@
+﻿@model ShareThings.Models.BorrowCommonViewModel
+
+@{
+    ViewData["Title"] = "Reject Borrow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Reject Borrow</h1>
+
+<h4>Borrow</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form enctype="multipart/form-data" asp-action="Reject">
+            <input type="hidden" asp-for="Borrow.Start" />
+            <input type="hidden" asp-for="Borrow.End" />
+            @await Html.PartialAsync("~/Views/Borrows/_BorrowDetail.cshtml")
+            <div class="form-group">
+                <input type="submit" value="Reject Borrow" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input[name=starRO][value=" + $("#ScoreValue").val() + "]").prop('checked', true);
+        $("input[type=starRO]").attr('disabled', false);
+        $('noClic').click(false);
+    });
+
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

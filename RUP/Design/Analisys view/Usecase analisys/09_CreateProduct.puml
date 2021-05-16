@@ -1,0 +1,27 @@
+@startuml CreateProduct
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary ProductView
+control ProductController
+entity ProductRepository
+
+Actor -right-> (ProductView) : 1.create()
+(ProductView) --> (ProductController) : 2.setDataProduct()\n3.create(product)
+(ProductController) --> (ProductRepository) : 4.save(product)
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml ShowUserProfile
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary AccountView
+control AccountController
+entity UserEntity
+entity UserRepository
+entity BorrowRepository
+entity ProductRepository
+
+Actor -right-> (AccountView) : 1.viewProfile()
+(AccountView) --> (AccountController) : 2.getProfile()
+(AccountController) --> (UserEntity) : 3.checkIsLoged() \n4.getUserLoged()
+(AccountController) --> (UserRepository) : 5.finByMail(mail)
+(AccountController) --> (BorrowRepository) : 6.findByUser(user)
+(AccountController) --> (ProductRepository) : 7.findByUser(user)
+@enduml

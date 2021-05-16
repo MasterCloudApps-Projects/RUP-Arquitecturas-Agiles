@@ -1,0 +1,71 @@
+<mxfile host="65bd71144e" modified="2020-12-16T22:11:52.588Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.52.0 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36" etag="mn71A0luleMz8xJTgvJX" version="13.10.0" type="embed">
+    <diagram name="Page-1" id="e7e014a7-5840-1c2e-5031-d8a46d1fe8dd">
+        <mxGraphModel dx="1117" dy="790" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="jg-bdJbGxONM6aFM8Xrk-53" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="jg-bdJbGxONM6aFM8Xrk-48" target="jg-bdJbGxONM6aFM8Xrk-51" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="440" y="182" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="jg-bdJbGxONM6aFM8Xrk-48" value="INITIAL" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="375" y="115" width="130" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="jg-bdJbGxONM6aFM8Xrk-80" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#3399FF;" parent="1" source="jg-bdJbGxONM6aFM8Xrk-51" target="jg-bdJbGxONM6aFM8Xrk-79" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="jg-bdJbGxONM6aFM8Xrk-51" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="250" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="jg-bdJbGxONM6aFM8Xrk-62" value="FINAL" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="350" y="550" width="180" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="jg-bdJbGxONM6aFM8Xrk-73" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="520" y="340" width="142" height="33" as="geometry"/>
+                </mxCell>
+                <mxCell id="jg-bdJbGxONM6aFM8Xrk-74" value="Link to ShowBorrowList UserCase" style="fillColor=none;strokeColor=none;html=1;fontColor=#0057D8;align=left;fontSize=12" parent="jg-bdJbGxONM6aFM8Xrk-73" vertex="1">
+                    <mxGeometry x="17" width="125" height="33" as="geometry"/>
+                </mxCell>
+                <mxCell id="jg-bdJbGxONM6aFM8Xrk-75" value="" style="html=1;strokeWidth=1;shadow=0;dashed=0;shape=mxgraph.ios7.misc.link;fillColor=#4CDA64;strokeColor=none;buttonText=;strokeColor2=#222222;fontColor=#222222;fontSize=8;verticalLabelPosition=bottom;verticalAlign=top;align=center;" parent="jg-bdJbGxONM6aFM8Xrk-73" vertex="1">
+                    <mxGeometry y="11" width="15" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="jg-bdJbGxONM6aFM8Xrk-79" target="21" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="440" y="440" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="jg-bdJbGxONM6aFM8Xrk-79" value="SHOWBORROWLIST" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="370" y="340" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="jg-bdJbGxONM6aFM8Xrk-86" value="the system loads the user information" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="345" y="185" width="190" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="21" target="jg-bdJbGxONM6aFM8Xrk-62" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="SHOWPRODUCTLIST" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="370" y="450" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="520" y="450" width="142" height="33" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Link to SHowProductLIst UserCase" style="fillColor=none;strokeColor=none;html=1;fontColor=#0057D8;align=left;fontSize=12" parent="22" vertex="1">
+                    <mxGeometry x="17" width="125" height="33" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="" style="html=1;strokeWidth=1;shadow=0;dashed=0;shape=mxgraph.ios7.misc.link;fillColor=#4CDA64;strokeColor=none;buttonText=;strokeColor2=#222222;fontColor=#222222;fontSize=8;verticalLabelPosition=bottom;verticalAlign=top;align=center;" parent="22" vertex="1">
+                    <mxGeometry y="11" width="15" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="the system shows all the information in the screen" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="359" y="503" width="190" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="the system loads the user's borrow list" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FFFFFF;" vertex="1" parent="1">
+                    <mxGeometry x="350" y="296" width="190" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="the system loads the user's product list" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FFFFFF;" vertex="1" parent="1">
+                    <mxGeometry x="350" y="393" width="190" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

@@ -1,0 +1,62 @@
+﻿@model ShareThings.Models.BorrowsViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Lender list</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Borrower.First().ProductName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Borrower.First().Score)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Lender)
+        {
+            <input type="hidden" asp-for="@item.Score" id="ScoreValue" />
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    <div class="row" id="noClic" style="pointer-events: none">
+                        <div class="col-md-12">
+                            <div class="stars">
+                                <input class="star star-5" id="starRO-5" type="radio" readonly="readonly" value="5" name="starRO" />
+                                <label class="star star-5" for="starRO-5"></label>
+                                <input class="star star-4" id="starRO-4" type="radio" readonly="readonly" value="4" name="starRO" />
+                                <label class="star star-4" for="starRO-4"></label>
+                                <input class="star star-3" id="starRO-3" type="radio" readonly="readonly" value="3" name="starRO" />
+                                <label class="star star-3" for="starRO-3"></label>
+                                <input class="star star-2" id="starRO-2" type="radio" readonly="readonly" value="2" name="starRO" />
+                                <label class="star star-2" for="starRO-2"></label>
+                                <input class="star star-1" id="starRO-1" type="radio" readonly="readonly" value="1" name="starRO" />
+                                <label class="star star-1" for="starRO-1"></label>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input[name=starRO][value=" + $("#ScoreValue").val() + "]").prop('checked', true);
+        $("input[type=starRO]").attr('disabled', false);
+        $('noClic').click(false);
+    });
+
+</script>

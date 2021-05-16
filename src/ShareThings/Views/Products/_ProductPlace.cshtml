@@ -1,0 +1,46 @@
+﻿@using ShareThings.Models
+@model ShareThings.Models.FilterProductViewModel
+
+<div class="p-2 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Index">
+                <div class="row d-flex justify-content-center mt-100">
+                    <div class="col-md-5">
+                        <select class="multi-select" id="Family" asp-for="Family" placeholder="Family" multiple>
+                            @foreach (var family in Model.Families)
+                            {
+                                <option value="@family.Value">@family.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <select class="multi-select" id="SubFamily" asp-for="SubFamily" placeholder="Subfamily" multiple>
+                            @foreach (var subfamily in Model.Subfamilies)
+                            {
+                                <option value="@subfamily.Value">@subfamily.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" value="Apply filter" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="card" style="width:18rem;margin:0 auto;float:none;margin-bottom:10px;">
+                <img class="card-img-top" style="height: 180px;width:100%;" alt="photoProduct" src="@(product.Photos.Any() ? product.Photos.FirstOrDefault().Url : ViewData["DefaultImage"])">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">@product.Description</p>
+                    @Html.ActionLink("Show Details", "Details", "Products", new { id = @product.ProductId}, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        }
+    </div>
+</div>

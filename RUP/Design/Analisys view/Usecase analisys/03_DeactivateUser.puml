@@ -1,0 +1,28 @@
+@startuml UserDeactivate
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary AccountView
+control AccountController
+entity UserRepository
+entity UserEntity
+
+Actor -right-> (AccountView) : 1.deactivate()
+(AccountView) -down-> (AccountController) : 2.deactivate()
+(AccountController) -down-> (UserRepository) : 5.save(User)
+(AccountController) -down-> (UserEntity) : 3.getUser()\n4.deactivate()
+@enduml

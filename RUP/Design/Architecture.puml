@@ -1,0 +1,35 @@
+@startuml Architecture
+
+package Views {
+   class HomeView
+   class AccountView
+   class BorrowView
+   class ProductView
+}
+
+package Controllers {
+    class HomeController
+    class AccountController
+    class ProductController 
+    class BorrowController
+}
+
+package Models {
+    class BorrowEntity
+    class CommentEntity
+    class PhotoEntity
+    class ProductEntity
+    class ScoreEntity
+    class UserEntity
+    class RoleEntity
+    class UserRoleEntity
+    class ProductRepository  
+    class BorrowRepository
+    class UserRepository
+}
+
+Views .down.> Models
+Controllers .down.> Models
+Views .left.> Controllers
+
+@enduml

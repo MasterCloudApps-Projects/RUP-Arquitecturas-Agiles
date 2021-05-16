@@ -1,0 +1,29 @@
+@startuml SetScoreBorrow
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary BorrowView
+control BorrowController
+entity BorrowRepository
+entity BorrowEntity
+
+Actor -right-> (BorrowView) : 1.setscore(borrowId)
+(BorrowView) --> (BorrowController) : 2.setDataScore()\n3.accept(borrowId, score)
+(BorrowController) --> (BorrowEntity) : 4.setScore(score)
+(BorrowController) --> (BorrowRepository) : 5.save(borrow)
+
+@enduml

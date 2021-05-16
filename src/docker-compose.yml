@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: dev-mssql-server-Frostis
+    ports:
+      - 1433:1433
+    environment:
+      SA_PASSWORD: TfmInfinit0!
+      ACCEPT_EULA: "Y"
+  web:
+    image: ${DOCKER_REGISTRY-}sharethings
+    build:
+      context: .
+      dockerfile: ShareThings/Dockerfile
+    environment:
+      - ConnectionStrings__ShareThingsDatabase=Server=db;Database=ShareThings;User Id=sa;Password=TfmInfinit0!;
+      # - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=tfmsharethings1.
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/ShareThings/Certs/ShareThings.pfx
+    volumes:
+      - ./ShareThings:/app/ShareThings:cached
+      - ./ShareThings.Data:/app/ShareThings.Data:cached
+      - ./ShareThings.Domain:/app/ShareThings.Domain:cached
+      - ./entrypoint.sh:/entrypoint.sh
+    working_dir: /app/ShareThings
+    ports:
+      - 443:443
+      - 80:80
+    entrypoint:
+      - sh
+      - /entrypoint.sh
+    depends_on:
+      - db

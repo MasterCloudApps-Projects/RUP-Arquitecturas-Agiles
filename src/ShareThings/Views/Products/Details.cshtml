@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ShareThings.Areas.Identity.Data
+@model ShareThings.Models.ProductViewModel
+
+@inject IShareThingsUserManager UserManager
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Subtype)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Subtype)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.End)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.End)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dd class="col-sm-10">
+            <div class="row">
+                @foreach (var photo in Model.Photos)
+                {
+                    <div class="col-sm">
+                        <a class="thumbnail" target="_blank" href="@photo.Url">
+                            <img class="img-responsive" src="@photo.Url" alt="photoProduct" style="height: 120px;width:120px;" >
+                        </a>
+                    </div>
+                }
+            </div>
+        </dd>
+    </dl>
+</div>
+@if (Convert.ToBoolean(ViewData["ShowActions"]))
+{
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a> |
+    <a asp-action="StatusShary" asp-route-id="@Model.ProductId">@(Model.Status=="Shary" ? "UnShary":"Shary")</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+}
+else
+{
+    <div>
+        @if (DateTime.Now > Model.Start && DateTime.Now < Model.End)
+        {
+            @Html.ActionLink("Request Borrow", "Create", "Borrows", new { idProduct = @Model.ProductId }, new { @class = "btn btn-warning" }) <span>|</span>
+        }
+        <a asp-action="Index">Back to List</a>
+    </div>
+}

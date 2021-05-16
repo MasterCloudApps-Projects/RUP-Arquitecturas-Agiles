@@ -1,0 +1,65 @@
+﻿@model ShareThings.Models.BorrowCommonViewModel
+@*@using Microsoft.AspNetCore.Identity
+@using ShareThings.Areas.Identity.Data
+
+@inject IShareThingsUserManager UserManager*@
+
+@{
+    ViewData["Title"] = "Add Comment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add Comment</h1>
+
+<h4>Borrow</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form enctype="multipart/form-data" asp-action="AddComment">
+            <input type="hidden" asp-for="Borrow.Start" />
+            <input type="hidden" asp-for="Borrow.End" />
+            @await Html.PartialAsync("~/Views/Borrows/_BorrowDetail.cshtml")
+            <div class="form-group">
+                <div class="card-no-border">
+                    <div class="row">
+                        <div class="col-2"> <img src="https://tanzolymp.com/images/default-non-user-no-photo-1.jpg" alt="defaultImage" width="70" class="rounded-circle mt-2"> </div>
+                        <div class="col-10">
+                            <div class="comment-box ml-2">
+                                <h4>Add a comment</h4>
+                                <div class="comment-area">
+                                    <textarea class="form-control" placeholder="what do you think about the product or borrow?" asp-for="Comment.Text" rows="4"></textarea>
+                                </div>
+                                <div class="comment-btns mt-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="pull-right"><input type="submit" value="Save Comment" name="btnAddComment" class="btn btn-primary" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input[name=starRO][value=" + $("#ScoreValue").val() + "]").prop('checked', true);
+        $("input[type=starRO]").attr('disabled', false);
+        $('noClic').click(false);
+        $("#Comment_Text").val("");
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

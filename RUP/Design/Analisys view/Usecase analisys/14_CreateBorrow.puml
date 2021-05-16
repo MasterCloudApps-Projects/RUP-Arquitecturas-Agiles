@@ -1,0 +1,29 @@
+@startuml CreateBorrow
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary BorrowView
+boundary ProductView
+control BorrowController
+entity BorrowRepository
+
+Actor -right-> (ProductView) : 1.createBorrow(productId)
+(ProductView) --> (BorrowView) : 2.create(productId)
+(BorrowView) --> (BorrowController) : 3.create(borrowViewModel)
+(BorrowController) --> (BorrowRepository) : 4.save(borrow)
+
+@enduml

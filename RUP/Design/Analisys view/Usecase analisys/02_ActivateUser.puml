@@ -1,0 +1,30 @@
+@startuml ActiveUser
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary AccountView
+control AccountController
+entity UserRepository
+entity UserEntity
+
+Actor -right-> (AccountView) : 1.setUserData()\n2.activate(userId)
+(AccountView) --> (AccountController) : 3.activate(user)
+(AccountController) --> (UserRepository) : 4.checkIfExits(userId)
+(AccountController) --> (UserEntity) : 5.activate()
+(AccountController) --> (UserRepository) : 6.save(user)
+
+@enduml

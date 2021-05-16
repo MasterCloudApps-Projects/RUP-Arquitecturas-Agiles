@@ -1,0 +1,309 @@
+@startuml UserDeactivate
+package View {
+
+  package Views {
+    class AccountView {
+      + create()
+      + activate()
+      + deactivate()
+      + login()
+      + logout()
+      + reminderPassword()
+      + registerNewPassword()
+      + showProfile()
+    }
+
+    class ProductView {
+      + create()
+      + delete()
+      + details()
+      + edit()
+      + index()
+      + StatusShary()
+    }
+
+    class BorrowView {
+      + borrowDetail()
+      + addComment()
+      + confirm()
+      + create()
+      + details()
+      + edit()
+      + index()
+      + ownerDetail()
+      + reject()
+      + score()
+    }
+
+    class HomeView {
+      + productPlace()
+      + index()
+      + Privacy()
+    }
+  }
+
+  package Models {
+
+    class BorrowCommonViewModel {
+      + comment : CommentViewModel
+      + borrow : BorrowViewModel
+    }
+
+    class BorrowsViewModel {
+      + lender : List<BorrowViewModel>
+      + borrower : List<BorrowViewModel>
+    }
+
+    class BorrowViewModel{
+      + borrowerId
+      + borrowId
+      + start
+      + end
+      + status
+      + score
+      + borroweName
+      + borrowerUserIdentity
+      + productId
+      + productStart
+      + productEnd
+      + productOwner
+      + productOwnerId
+      + productOwnerUserIdentity
+      + productName
+      + comments : List<CommentViewModel>
+    }
+
+    class CommentViewModel {
+      + commentId
+      + text
+      + ownerId
+      + ownerUserIdentity
+      + borrowId
+      + owner
+      + creation
+    }
+
+    class ErrorViewModel{
+      + requestId
+      + showRequestId
+    }
+
+    class FilterProductTypeViewModel{
+      + family : List<string>
+      + subFamily : List<string>
+    }
+
+    class FilterProductViewModel{
+      + products : List<ProductViewModel>
+      + families : List<ValueTextModel>
+      + subfamilies : List<ValueTextModel>
+    }
+
+    class ProductViewModel{
+      + productId
+      + name
+      + type
+      + subtype
+      + start
+      + end
+      + description
+      + status
+      + images
+      + photos
+      + owner
+    }
+
+    class ValueTextModel{
+      + value
+      + text
+    }
+  }
+}
+
+package Controllers {
+
+  class HomeController {
+    + GetBorrowPlace(FilterProductTypeViewModel)
+    + Privacy()
+  }
+
+  class ProductsController {
+    + GetProducts() : List<ProductViewModel>
+    + Details(idProduct) : ProductViewModel
+    + Create(ProductViewModel)
+    + Edit(idProduct, ProductViewModel)
+    + Delete(idProduct)
+    + DeletePhoto(idProduct, idPhoto)
+    + ChangeStatusShary(idProduct)
+  }
+
+  class BorrowsController {
+    + GetBorrows() : List<BorrowsViewModel>
+    + Details(idBorrow) : BorrowsViewModel
+    + Create(idProduct, BorrowsViewModel)
+    + Edit(idBorrow, BorrowsViewModel)
+    + AddComment(idBorrow, BorrowsViewModel)
+    + Confirm(idBorrow)
+    + Reject(idBorrow)
+    + Score(idBorrow, BorrowsViewModel)
+    + OwnerDetail(idBorrow) : List<BorrowsViewModel>
+  }
+
+  class AccountController {
+    + Register(UserViewModel)
+    + Activate(userId)
+    + Deactivate(userId)
+    + Login(email, password)
+    + Logout(userId)
+    + ForgotPassword(email)
+    + ResetPassword(userId, newPassword)
+    + ResendEmailConfirmation(email)
+    + ChangeEmail(email)
+    + GetProfile(userId)
+  }
+}
+
+package Entities {
+
+  class User {
+    - userId
+    - name
+    - userIdentityId
+    - surname
+    - address
+    - birthDate
+    - postalCode
+    - userName
+    - email
+    - password
+    - phoneNumber
+    - country
+    - Scores : List<BorrowScore>
+    - Products : List<Product>
+    - Comments : List<BorrowComment>
+    - Borrows : List<Borrow>
+
+    + Activate()
+    + Deactivate()
+    + CheckCredentials(password) : boolean
+    + ChangePassword(newPassword)
+  }
+
+  class Product {
+    - productId
+    - ownerId
+    - name
+    - description
+    - family : ProductType
+    - availability : Term
+    - status : ProductStatus
+    - photos : List<Photo>
+
+    + EditNameAndDescription(string name, string description)
+    + EditFamily(ProductType family)
+    + EditAvailability(Term availability)
+    + AddPhotos(List<string> urlPhotos)
+    + RemovePhoto(int photoId) : Photo
+    + IsAvailable(Term term)
+    + IsOwner(User user)
+    + IsShary()
+    + IsUnshary()
+    + IsBorrowed()
+    + Shary()
+    + UnShary()
+    + Borrowed()
+  }
+
+  enum ProductStatus {
+    + Shary
+    + Unshary
+    + Borrowed
+  }
+
+  class ProductType {
+    - type
+    - subtype
+  }
+
+  class Photo {
+    - photoId
+    - url
+    - productId
+  }
+
+  class Term {
+    - start
+    - end
+    + IsBetween(DateTime date)
+    + IsTermInclude(Term term)
+  }
+
+  class Borrrow {
+    - borrowId
+    - borrowerId
+    - productId
+    - status : BorrrowStatus
+    - duration : Term
+    - score : List<Score>
+    - comments : List<Comment>
+
+    + EditDuration(Term newDuration)
+    + Confirm()
+    + Reject()
+    + Close()
+    + IsBorrower(User user)
+    + IsLender(User user)
+    + AddComment(string text, User user)
+    + AddScore(Score score, User user)
+    + AverageScore()
+  }
+
+  class Comment {
+    - commentId
+    - ownerId
+    - borrowId
+    - text
+    - creationDate
+  }
+
+  enum BorrrowStatus {
+    +  Created
+    +  Accepted
+    +  Rejected
+    +  Closed
+  }
+
+  class Score {
+    - scoreId
+    - ownerId
+    - borrowId
+    - punctuation
+
+    + GetScore()
+  }
+
+  interface UserRepository {
+    + Save(User)
+    + Delete(User)
+    + Get(id) : User
+    + FindByEmail(email) : User
+  }
+
+  interface ProductRepository {
+    + Save(Product)
+    + Delete(Product)
+    + Get(id) : Product
+    + GetAll() : List<Product>
+    + GetAllByUser(User) : List<Product>
+    + GetFamilies()
+  }
+
+  interface BorrowRepository {
+    + Save(Borrow)
+    + Get(id) : Borrow
+    + GetAllByLender(User) : List<Borrow>
+    + GetAllByBorrower(User) : List<Borrow>
+  }
+}
+
+@enduml

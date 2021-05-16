@@ -1,0 +1,86 @@
+﻿@model ShareThings.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form enctype="multipart/form-data" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProductId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" maxlength="50" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" maxlength="25" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subtype" class="control-label"></label>
+                <input asp-for="Subtype" class="form-control" maxlength="25" />
+                <span asp-validation-for="Subtype" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        Availability:
+                    </div>
+                    <div class="col-md-5">
+                        <label asp-for="Start"></label>
+                        <input asp-for="Start" class="form-control" />
+                        <span asp-validation-for="Start" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-5">
+                        <label asp-for="End"></label>
+                        <input asp-for="End" class="form-control" />
+                        <span asp-validation-for="End" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Comment</label>
+                <textarea asp-for="Description" class="form-control" cols="50" rows="5" maxlength="250"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    @foreach (var photo in Model.Photos)
+                    {
+                    <div class="col-sm">
+                        <a class="thumbnail" target="_blank" href="@photo.Url">
+                            <img class="img-responsive" src="@photo.Url" alt="photoProduct" style="height: 120px;width:120px;">
+                        </a>
+                        <a class="btn btn-info glyphicon glyphicon-shopping-cart" href="/Products/@photo.ProductId/DeletePhoto/@photo.PhotoId">Delete</a>
+                    </div>
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Images">Photos</label>
+                <input asp-for="Images" type="file" multiple>
+                <span asp-validation-for="Images"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

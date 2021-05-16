@@ -1,0 +1,26 @@
+@startuml ShowProductDetail
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary ProductView
+control ProductController
+entity ProductRepository
+
+Actor -right-> (ProductView) : 1.details(productId)
+(ProductView) --> (ProductController) : 2.details(productId)
+(ProductController) --> (ProductRepository) : 3.get(productId)
+@enduml

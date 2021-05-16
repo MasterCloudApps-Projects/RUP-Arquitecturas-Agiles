@@ -1,0 +1,29 @@
+﻿@model ShareThings.Models.BorrowCommonViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Borrow</h4>
+    <hr />
+    @await Html.PartialAsync("~/Views/Borrows/_BorrowDetail.cshtml")
+</div>
+
+<div>
+    <a asp-action="OwnerDetail" asp-route-id="@Model.Borrow.BorrowId"> Owner Details</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input[name=starRO][value=" + $("#ScoreValue").val() + "]").prop('checked', true);
+        $("input[type=starRO]").attr('disabled', false);
+        $('noClic').click(false);
+    });
+
+</script>
+

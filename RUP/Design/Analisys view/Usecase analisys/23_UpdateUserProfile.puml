@@ -1,0 +1,27 @@
+@startuml UpdateUserProfile
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary AccountView
+control AccountController
+entity UserRepository
+
+Actor -right-> (AccountView) : 1.viewProfile()
+(AccountView) --> (AccountController) : 2.getProfile()
+(AccountController) --> (UserRepository) : 3.getUserData() \n4.checkDataModified() \n5.setDataModified() \n6.Update(user)
+
+@enduml

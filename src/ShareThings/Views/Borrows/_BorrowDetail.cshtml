@@ -1,0 +1,106 @@
+﻿@using ShareThings.Models
+@model ShareThings.Models.BorrowCommonViewModel
+
+@using Microsoft.AspNetCore.Identity
+@using ShareThings.Areas.Identity.Data
+
+@inject IShareThingsUserManager UserManager
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="Borrow.ProductId" />
+<input type="hidden" asp-for="Borrow.BorrowId" />
+<input type="hidden" asp-for="Borrow.Score" id="ScoreValue" />
+<input type="hidden" asp-for="Borrow.ProductStart" />
+<input type="hidden" asp-for="Borrow.ProductEnd" />
+
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayName("ProductName")
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Borrow.ProductName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayName("Borrower")
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Borrow.BorrowerName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayName("ProductOwner")
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Borrow.ProductOwner)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayName("Product Availity")
+    </dt>
+    <dd class="col-sm-10">
+        <strong>from </strong>@Html.DisplayFor(model => model.Borrow.ProductStart) <strong>to </strong> @Html.DisplayFor(model => model.Borrow.ProductEnd)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Borrow.Status)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Borrow.Status)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Borrow.Score)
+    </dt>
+    <dd class="col-sm-10">
+        <div class="row" id="noClic" style="pointer-events: none">
+            <div class="col-md-12">
+                <div class="stars">
+                    <input class="star star-5" id="starRO-5" type="radio" readonly="readonly" value="5" name="starRO" />
+                    <label class="star star-5" for="starRO-5"></label>
+                    <input class="star star-4" id="starRO-4" type="radio" readonly="readonly" value="4" name="starRO" />
+                    <label class="star star-4" for="starRO-4"></label>
+                    <input class="star star-3" id="starRO-3" type="radio" readonly="readonly" value="3" name="starRO" />
+                    <label class="star star-3" for="starRO-3"></label>
+                    <input class="star star-2" id="starRO-2" type="radio" readonly="readonly" value="2" name="starRO" />
+                    <label class="star star-2" for="starRO-2"></label>
+                    <input class="star star-1" id="starRO-1" type="radio" readonly="readonly" value="1" name="starRO" />
+                    <label class="star star-1" for="starRO-1"></label>
+                </div>
+            </div>
+        </div>
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Borrow.Start)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Borrow.Start)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Borrow.End)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Borrow.End)
+    </dd>
+    <dd class="col-sm-10">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-no-border">
+                    <div class="card-body">
+                        <h4 class="card-title">Recent Comments</h4>
+                        <h6 class="card-subtitle">Latest Comments section by users</h6>
+                    </div>
+
+                    @foreach (var comment in Model.Borrow.Comments)
+                    {
+                        <div class="comment-widgets m-b-20">
+                            <div class="d-flex flex-row comment-row">
+                                <div class="p-2"><span class="round"><img src="https://tanzolymp.com/images/default-non-user-no-photo-1.jpg" alt="user" width="50"></span></div>
+                                <div class="comment-text w-100">
+                                    <h6>@UserManager.FindUserName(comment.OwnerUserIdentity)</h6>
+                                    <div class="comment-footer"> <span class="date">@comment.Creation</span></div>
+                                    <p class="m-b-5 m-t-10">@comment.Text</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </dd>
+</dl>

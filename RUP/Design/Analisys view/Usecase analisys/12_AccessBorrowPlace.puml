@@ -1,0 +1,27 @@
+@startuml AccessBorrowPlace
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary HomeView
+control HomeController
+entity ProductRepository
+
+Actor -right-> (HomeView) : 1.GetBorrowPlace()
+(HomeView) --> (HomeController) : 3.GetBorrowPlace(FilterProductTypeViewModel)
+(HomeController) --> (ProductRepository) : 4.GetProducts(FilterProductTypeViewModel)
+
+@enduml

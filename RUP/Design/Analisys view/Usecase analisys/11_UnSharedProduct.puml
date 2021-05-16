@@ -1,0 +1,29 @@
+@startuml UnSharedProduct
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary ProductView
+control ProductController
+entity ProductEntity
+entity ProductRepository
+
+Actor -right-> (ProductView) : 1.unShary(id)
+(ProductView) --> (ProductController) : 2.unShary(id)
+(ProductController) --> (ProductEntity) : 3.isShary()\n4.unShary()
+(ProductController) --> (ProductRepository) : 5.save(product)
+
+@enduml

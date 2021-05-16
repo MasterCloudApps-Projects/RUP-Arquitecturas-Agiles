@@ -1,0 +1,64 @@
+﻿@model ShareThings.Models.BorrowCommonViewModel
+
+@{
+    ViewData["Title"] = "Score Borrow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Score Borrow</h1>
+
+<h4>Borrow</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form enctype="multipart/form-data" asp-action="Score" id="ScoreForm">
+            <input type="hidden" asp-for="Borrow.Start" />
+            <input type="hidden" asp-for="Borrow.End" />
+            @await Html.PartialAsync("~/Views/Borrows/_BorrowDetail.cshtml")
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="stars">
+                            <input class="star star-5" id="star-5" type="radio" value="5" name="star" />
+                            <label class="star star-5" for="star-5"></label>
+                            <input class="star star-4" id="star-4" type="radio" value="4" name="star" />
+                            <label class="star star-4" for="star-4"></label>
+                            <input class="star star-3" id="star-3" type="radio" value="3" name="star" />
+                            <label class="star star-3" for="star-3"></label>
+                            <input class="star star-2" id="star-2" type="radio" value="2" name="star" />
+                            <label class="star star-2" for="star-2"></label>
+                            <input class="star star-1" id="star-1" type="radio" value="1" name="star" />
+                            <label class="star star-1" for="star-1"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="boton" value="Set Score" class="btn btn-info" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script type="text/javascript">
+    $('#ScoreForm input').on('change', function () {
+        var score = $('input[name=star]:checked', '#ScoreForm').val();
+        $("#ScoreValue").val(score);
+    });
+
+    $(document).ready(function () {
+        $("input[name=starRO][value=" + $("#ScoreValue").val() + "]").prop('checked', true);
+        $("input[type=starRO]").attr('disabled', false);
+        $('noClic').click(false);
+    });
+
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

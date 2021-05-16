@@ -1,0 +1,28 @@
+@startuml DeleteProduct
+
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary ProductView
+control ProductController
+entity ProductRepository
+
+Actor -right-> (ProductView) : 1.viewProduct()
+(ProductView) --> (ProductController) : 2.getProduct()
+(ProductController) --> (ProductRepository) : 3.delete(product)
+
+@enduml

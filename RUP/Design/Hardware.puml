@@ -1,0 +1,52 @@
+@startuml Hardware
+
+cloud "GitHub Platform" {
+    node "GitHub Actions" {
+        frame "MCA-TFM-Sharethings" {
+            Code - [repository]
+        }
+    }
+}
+
+cloud "Azure Platform" {
+    node "sharethings-quality" {
+        frame "sharethings-quality-plan" {
+            SonarQube - [sharethingsqualitywww]
+        }
+    }
+
+    node "sharethings-web" {
+        frame "sharethings-web-plan" {
+            AppService - [sharethings]
+            ApplicationInsights - [sharethings-insights]
+        }
+    }
+
+    node "tfm-monolitos" {
+        frame "containers" {
+            database "basics" {
+                Blob1 - [basics-db]
+            }
+            database "photoproducts" {
+                Blob2 - [photoproducts-db]
+            }
+        }
+    }
+    
+    node "sharethings-sql" {
+        frame "sharethings-sql-plan" {
+            database "ShareThings" {
+                SQLServer - [sharethings-db]
+            }
+        }
+    }
+}
+
+[repository] --> [sharethingsqualitywww] : Continuous Integration (CI)
+[repository] --> [sharethings] : Continuous Deployment (CD)
+[sharethings] --> [sharethings-insights]
+[sharethings] --> [sharethings-db]
+[sharethings] --> [basics-db]
+[sharethings] --> [photoproducts-db]
+
+@enduml

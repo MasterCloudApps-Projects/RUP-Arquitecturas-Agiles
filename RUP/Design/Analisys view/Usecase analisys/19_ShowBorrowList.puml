@@ -1,0 +1,26 @@
+@startuml ShowBorrowList
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary BorrowView
+control BorrowController
+entity BorrowRepository
+
+Actor -right-> (BorrowView) : 1.getBorrows()
+(BorrowView) --> (BorrowController) : 2.getBorrows()
+(BorrowController) -down-> (BorrowRepository) : 3.getBorrowsByLender() \n4.getBorrowsByOwner()
+@enduml

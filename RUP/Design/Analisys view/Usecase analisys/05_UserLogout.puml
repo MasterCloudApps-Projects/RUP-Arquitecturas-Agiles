@@ -1,0 +1,27 @@
+@startuml UserLogout
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary AccountView
+control AccountController
+entity UserEntity
+
+Actor -right-> (AccountView) : 1.setUserData()\n2.logout(userId)
+(AccountView) --> (AccountController) : 3.logout(userId)
+(AccountController) --> (UserEntity) : 4.checkIsInSession(userId)\n5.updateState()
+
+@enduml

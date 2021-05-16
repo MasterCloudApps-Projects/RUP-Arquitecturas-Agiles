@@ -1,0 +1,29 @@
+@startuml RejectBorrow
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+actor Actor
+boundary BorrowView
+control BorrowController
+entity BorrowRepository
+entity BorrowEntity
+
+Actor -right-> (BorrowView) : 1.reject(borrowId)
+(BorrowView) --> (BorrowController) : 2.reject(borrowId)
+(BorrowController) --> (BorrowEntity) : 3.reject()
+(BorrowController) --> (BorrowRepository) : 4.save(borrow)
+
+@enduml

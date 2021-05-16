@@ -1,0 +1,62 @@
+@startuml ShareThings
+
+left to right direction
+actor "Usuario" as user
+rectangle ShareThings {
+  
+  usecase "CreateUser" as UC1
+  usecase "ActivateUser" as UC2
+  usecase "DeactivateUser" as UC3
+  usecase "UserLogin"  as UC4
+  usecase "UserLogout" as UC5
+  usecase "RecoveryPassword" as UC6
+  usecase "SetNewPassword" as UC21
+  usecase "ShowUserProfile"  as UC7
+  usecase "CreateProduct" as UC8
+  usecase "ShowListDetail" as UC9
+  usecase "UnSharedProduct"  as UC10
+  usecase "AccessBorrowPlace" as UC11
+  usecase "SearchInBorrowPlace" as UC12
+  usecase "CreateBorrow"  as UC13
+  usecase "ConfirmBorrow" as UC14
+  usecase "AddCommentToBorrow" as UC15
+  usecase "RejectBorrow"  as UC16
+  usecase "SetScoreBorrow" as UC17
+  usecase "ShowBorrowList" as UC18
+  usecase "ShowBorrowDetail"  as UC19
+  usecase "ShowUserScore" as UC20
+  usecase "ShowProductList" as UC22
+  usecase "UpdateUserProfile" as UC23
+  usecase "EditBorrow" as UC24
+  usecase "EditProduct" as UC25
+  usecase "DeleteProduct" as UC26
+}
+
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+user --> UC5
+user --> UC6
+user --> UC7
+user --> UC8
+user --> UC9
+user --> UC10
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+user --> UC21
+user --> UC22
+user --> UC23
+user --> UC24
+user --> UC25
+user --> UC26
+
+@enduml

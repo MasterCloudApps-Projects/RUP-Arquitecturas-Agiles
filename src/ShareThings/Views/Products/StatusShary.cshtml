@@ -1,0 +1,70 @@
+﻿@model ShareThings.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = Model.Status == "Shary" ? "UnShary" : "Shary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@(Model.Status=="Shary" ? "UnShary":"Shary")</h1>
+
+<h3>Are you sure you want to @(Model.Status=="Shary" ? "UnShary":"Shary") this?</h3>
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Subtype)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Subtype)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.End)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.End)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dd class="col-sm-10">
+            <div class="row">
+                @foreach (var photo in Model.Photos)
+                {
+                    <div class="col-sm">
+                        <a class="thumbnail" target="_blank" href="@photo.Url">
+                            <img class="img-responsive" src="@photo.Url" alt="photoProduct" style="height: 120px;width:120px;" >
+                        </a>
+                    </div>
+                }
+            </div>
+        </dd>
+    </dl>
+
+    <form asp-action="StatusShary">
+        <input type="hidden" asp-for="ProductId" />
+        <input type="submit" value="@(Model.Status=="Shary" ? "UnShary":"Shary")" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

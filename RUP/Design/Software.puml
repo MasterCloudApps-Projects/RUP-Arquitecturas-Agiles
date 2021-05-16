@@ -1,0 +1,69 @@
+@startuml Software
+
+skinparam boundary {
+  backgroundColor DodgerBlue
+  borderColor black
+}
+
+skinparam control {
+  backgroundColor LimeGreen
+  borderColor black
+}
+
+skinparam entity {
+  backgroundColor Orange
+  borderColor black
+}
+
+boundary View 
+control Controller
+entity Repositories
+
+boundary XStyle<<css>>
+boundary XTemplate<<cshtml>>
+
+entity XEntity as AnalysisEntity
+
+control XGateway<<ThirdParty>> #MediumPurple
+control XController<<net>>
+control XService<<net>>
+
+entity XRepository<<net>>
+entity XDto<<net>>
+entity XEntity<<net>>
+entity XModel<<net>>
+
+(View) -right-> (Controller) 
+(Controller) -right-> (Repositories) 
+
+(XStyle) ...[#SlateGray]up.> (View)
+(XTemplate) ...[#SlateGray]up.> (View)
+(XTemplate) -left-> (XStyle)
+(XTemplate) -right-> (XGateway)
+(XGateway) .[#SlateGray]right.> (XController)
+(XTemplate) -down-> (XModel)
+(XGateway) -down-> (XModel)
+(XModel) .[#SlateGray]right.> (XDto)
+
+(View) -down-> (AnalysisEntity) 
+(Controller) -down-> (AnalysisEntity) 
+
+(XGateway) ...[#SlateGray]up.> (Controller)
+(XController) ...[#SlateGray]up.> (Controller)
+(XService) ...[#SlateGray]up.> (Controller)
+
+(XController) -right-> (XService)
+
+(XRepository) ...[#SlateGray]up.> (Repositories)
+(XService) -right-> (XRepository)
+
+(XDto) .[#SlateGray]up.> (AnalysisEntity)
+(XEntity) .[#SlateGray]up.> (AnalysisEntity)
+(XDto) -right-> (XEntity)
+
+(XController) -down-> (XDto)
+(XService) -down-> (XDto)
+(XService) -down-> (XEntity)
+(XRepository) -down-> (XEntity)
+
+@enduml
