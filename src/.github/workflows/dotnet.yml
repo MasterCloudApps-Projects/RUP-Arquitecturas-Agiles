@@ -1,0 +1,57 @@
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+env:
+  AZURE_WEBAPP_NAME: sharethings
+  AZURE_WEBAPP_PACKAGE_NAME: "../published"
+  NETCORE_VERSION: "5.0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest      
+    steps:
+    - uses: actions/checkout@v2
+    - uses: microsoft/variable-substitution@v1 
+      with:
+        files: '../RUP-Arquitecturas-Agiles/src/ShareThings/appsettings.json'
+      env:
+        ConnectionStrings.ShareThingsDatabase: ${{ secrets.SHARETHINGS_CONNECTION_STRING }}
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Sonar Setup
+      uses: Warchant/setup-sonar-scanner@v3
+    - name: Restore dependencies
+      run: dotnet restore ShareThings.sln
+    - name: Build
+      run: dotnet build ShareThings.sln --no-restore
+    - name: Test
+      run: dotnet test ShareThings.sln --no-build --verbosity normal
+    - name: Update database
+      run: |
+        dotnet tool install --global dotnet-ef
+        dotnet tool restore
+        dotnet ef --startup-project ./ShareThings/ database update -c ShareThingsDbContext --project ShareThings.Data
+        dotnet ef database update -c ShareThingsIdentityContext --project ShareThings
+    - name: Run Sonarqube Analysis
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: sonar-scanner
+           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+           -Dsonar.organization=ShareThings
+           -Dsonar.host.url=https://sharethingsqualitywww.azurewebsites.net/ 
+           -Dsonar.projectKey=ShareThings
+    - name: Publish
+      run: |
+        dotnet publish ShareThings.sln --configuration Release  --output ${{ env.AZURE_WEBAPP_PACKAGE_NAME }}
+    - name: Deploy to Azure
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package:  ${{ env.AZURE_WEBAPP_PACKAGE_NAME }}
